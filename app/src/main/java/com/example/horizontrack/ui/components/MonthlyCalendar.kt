@@ -1,5 +1,7 @@
 package com.example.horizontrack.ui.components
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -31,6 +33,7 @@ import java.time.YearMonth
  * Interactive monthly calendar component for habit tracking.
  * Shows the current month with completion status for each day.
  */
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun MonthlyCalendar(
     completions: List<LocalDate>,
@@ -48,7 +51,6 @@ fun MonthlyCalendar(
     val startDate = firstDayOfMonth.minusDays((firstDayOfWeek.value % 7).toLong())
     
     val completionSet = completions.toSet()
-    val daysInMonth = lastDayOfMonth.dayOfMonth
     val weeks = mutableListOf<List<LocalDate>>()
     var currentDate = startDate
     

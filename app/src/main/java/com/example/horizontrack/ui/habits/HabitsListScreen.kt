@@ -1,19 +1,20 @@
 package com.example.horizontrack.ui.habits
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.BarChart
@@ -30,7 +31,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -45,6 +45,7 @@ import java.time.LocalDate
 /**
  * Main screen showing list of habits with a gamified header.
  */
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun HabitsListScreen(
     habitRepository: HabitRepository,
@@ -137,7 +138,7 @@ private fun HabitListItem(
     modifier: Modifier = Modifier,
 ) {
     val habitColor = Color(progress.habit.colorHex.toInt())
-    
+
     Card(
         modifier = modifier
             .fillMaxWidth()
@@ -149,44 +150,44 @@ private fun HabitListItem(
         elevation = CardDefaults.cardElevation(defaultElevation = 1.dp),
     ) {
         Row(modifier = Modifier.fillMaxWidth()) {
-            // Color indicator bar
             Box(
                 modifier = Modifier
                     .width(4.dp)
-                    .fillMaxWidth()
+                    .fillMaxHeight()
                     .background(habitColor),
             )
-            
+
             Column(modifier = Modifier.padding(16.dp)) {
-            Text(
-                text = progress.habit.name,
-                style = MaterialTheme.typography.titleMedium,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-            )
-            if (progress.habit.description.isNotBlank()) {
                 Text(
-                    text = progress.habit.description,
-                    style = MaterialTheme.typography.bodySmall,
-                    maxLines = 2,
+                    text = progress.habit.name,
+                    style = MaterialTheme.typography.titleMedium,
+                    maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
-                    modifier = Modifier.padding(top = 4.dp),
                 )
-            }
-            Row(
-                modifier = Modifier.padding(top = 8.dp),
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                Text(
-                    text = "Streak: ${progress.currentStreak} days",
-                    style = MaterialTheme.typography.bodySmall,
-                )
-                Text(
-                    text = "  •  Longest: ${progress.longestStreak}",
-                    style = MaterialTheme.typography.bodySmall,
-                )
+                if (progress.habit.description.isNotBlank()) {
+                    Text(
+                        text = progress.habit.description,
+                        style = MaterialTheme.typography.bodySmall,
+                        maxLines = 2,
+                        overflow = TextOverflow.Ellipsis,
+                        modifier = Modifier.padding(top = 4.dp),
+                    )
+                }
+                Row(
+                    modifier = Modifier.padding(top = 8.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Text(
+                        text = "Streak: ${progress.currentStreak} days",
+                        style = MaterialTheme.typography.bodySmall,
+                    )
+                    Text(
+                        text = "  •  Longest: ${progress.longestStreak}",
+                        style = MaterialTheme.typography.bodySmall,
+                    )
+                }
             }
         }
     }
-}}
+}
 

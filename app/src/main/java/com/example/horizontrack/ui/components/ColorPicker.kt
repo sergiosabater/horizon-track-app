@@ -1,5 +1,10 @@
 package com.example.horizontrack.ui.components
 
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -14,11 +19,11 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.unit.dp
 
 /**
@@ -41,7 +46,7 @@ fun ColorPicker(
         0xFF9C27B0L to "Deep Purple",
         0xFFF44336L to "Red",
     )
-    
+
     Column(modifier = modifier.fillMaxWidth()) {
         Text(
             text = "Color",
@@ -55,22 +60,32 @@ fun ColorPicker(
             colors.forEach { (colorHex, _) ->
                 val isSelected = selectedColorHex == colorHex
                 val color = Color(colorHex.toInt())
-                
+
+                val scale by animateFloatAsState(
+                    targetValue = if (isSelected) 1.15f else 1.0f,
+                    animationSpec = spring(
+                        dampingRatio = Spring.DampingRatioMediumBouncy,
+                        stiffness = Spring.StiffnessMedium,
+                    ),
+                    label = "colorScale",
+                )
+
+                val borderWidth by animateDpAsState(
+                    targetValue = if (isSelected) 3.dp else 0.dp,
+                    animationSpec = tween(durationMillis = 200),
+                    label = "borderWidth",
+                )
+
                 Box(
                     modifier = Modifier
                         .size(40.dp)
+                        .scale(scale)
                         .clip(CircleShape)
                         .background(color)
-                        .then(
-                            if (isSelected) {
-                                Modifier.border(
-                                    width = 3.dp,
-                                    color = MaterialTheme.colorScheme.onSurface,
-                                    shape = CircleShape,
-                                )
-                            } else {
-                                Modifier
-                            }
+                        .border(
+                            width = borderWidth,
+                            color = MaterialTheme.colorScheme.onSurface,
+                            shape = CircleShape,
                         )
                         .clickable { onColorSelected(colorHex) },
                 )

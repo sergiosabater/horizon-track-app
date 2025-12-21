@@ -7,8 +7,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -23,11 +28,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
-import com.example.horizontrack.domain.model.Habit
 import com.example.horizontrack.domain.repository.HabitRepository
 import com.example.horizontrack.ui.components.ColorPicker
 import com.example.horizontrack.ui.components.DayOfWeekSelector
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import java.time.DayOfWeek
 
@@ -68,6 +71,14 @@ fun HabitEditScreen(
         topBar = {
             TopAppBar(
                 title = { Text(text = "Edit Habit") },
+                navigationIcon = {
+                    IconButton(onClick = onNavigateBack) {
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                            contentDescription = "Back",
+                        )
+                    }
+                },
             )
         },
     ) { paddingValues: PaddingValues ->
@@ -107,7 +118,7 @@ fun HabitEditScreen(
 
                 Text(
                     text = "Active Days",
-                    style = androidx.compose.material3.MaterialTheme.typography.labelLarge,
+                    style = MaterialTheme.typography.labelLarge,
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 DayOfWeekSelector(

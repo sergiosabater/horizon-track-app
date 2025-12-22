@@ -1,5 +1,7 @@
 package com.example.horizontrack.ui
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -18,6 +20,7 @@ import com.example.horizontrack.ui.statistics.StatisticsScreen
 /**
  * Main app composable that sets up navigation and theme.
  */
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun HorizonApp(
     dependencies: AppDependencies,
@@ -89,6 +92,7 @@ fun HorizonApp(
                     habitRepository = dependencies.habitRepository,
                     userProgressRepository = dependencies.userProgressRepository,
                     achievementRepository = dependencies.achievementRepository,
+                    onNavigateBack = { navController.popBackStack() },
                 )
             }
         }

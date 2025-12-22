@@ -14,16 +14,24 @@ import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.example.horizontrack.domain.repository.AchievementRepository
 import com.example.horizontrack.domain.repository.HabitRepository
@@ -33,12 +41,14 @@ import java.time.LocalDate
 /**
  * Statistics screen showing overall progress, achievements, and insights.
  */
+@OptIn(ExperimentalMaterial3Api::class)
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun StatisticsScreen(
     habitRepository: HabitRepository,
     userProgressRepository: UserProgressRepository,
     achievementRepository: AchievementRepository,
+    onNavigateBack: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val habitsFlow = habitRepository.observeHabitsWithProgress(LocalDate.now())
@@ -63,10 +73,24 @@ fun StatisticsScreen(
                 color = MaterialTheme.colorScheme.surface,
                 tonalElevation = 2.dp,
             ) {
-                Text(
-                    text = "Statistics",
-                    style = MaterialTheme.typography.headlineMedium,
-                    modifier = Modifier.padding(16.dp),
+                TopAppBar(
+                    title = {
+                        Text(
+                            text = "Statistics",
+                            style = MaterialTheme.typography.headlineMedium,
+                        )
+                    },
+                    navigationIcon = {
+                        IconButton(onClick = onNavigateBack) {
+                            Icon(
+                                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                                contentDescription = "Back",
+                            )
+                        }
+                    },
+                    colors = TopAppBarDefaults.topAppBarColors(
+                        containerColor = Color.Transparent,
+                    ),
                 )
             }
         },

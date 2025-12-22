@@ -20,6 +20,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
@@ -152,7 +153,9 @@ private fun CompactProgressHeader(
         )
 
         Surface(
-            modifier = modifier.fillMaxWidth(),
+            modifier = modifier
+                .fillMaxWidth()
+                .statusBarsPadding(),
             color = MaterialTheme.colorScheme.surface,
             tonalElevation = 2.dp,
         ) {
@@ -166,7 +169,6 @@ private fun CompactProgressHeader(
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
-
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Box(
                             modifier = Modifier
@@ -272,7 +274,6 @@ private fun CompactProgressHeader(
     }
 }
 
-// ✅ NUEVO: Card moderna con gradientes y mejor jerarquía
 @Composable
 private fun ModernHabitCard(
     progress: HabitProgress,
@@ -281,7 +282,6 @@ private fun ModernHabitCard(
 ) {
     val habitColor = Color(progress.habit.colorHex.toInt())
 
-    // Animación de escala al hacer tap
     var isPressed by remember { mutableStateOf(false) }
     val scale by animateFloatAsState(
         targetValue = if (isPressed) 0.97f else 1f,
@@ -307,7 +307,6 @@ private fun ModernHabitCard(
             modifier = Modifier
                 .fillMaxWidth()
                 .background(
-                    // Gradiente sutil del color del hábito
                     Brush.horizontalGradient(
                         colors = listOf(
                             habitColor.copy(alpha = 0.15f),
@@ -386,7 +385,7 @@ private fun ModernHabitCard(
     }
 }
 
-// ✅ NUEVO: Badge para stats
+
 @Composable
 private fun StatBadge(
     icon: String,
@@ -424,7 +423,6 @@ private fun StatBadge(
     }
 }
 
-// ✅ NUEVO: Empty state más atractivo
 @Composable
 private fun EmptyHabitsState(
     modifier: Modifier = Modifier,
@@ -460,7 +458,6 @@ private fun EmptyHabitsState(
     }
 }
 
-// ✅ MEJORADO: Logros más compactos
 @Composable
 private fun CompactAchievementsList(
     achievementRepository: AchievementRepository,

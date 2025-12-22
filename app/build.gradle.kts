@@ -59,6 +59,7 @@ dependencies {
     // Room for local persistence (ready to sync with cloud later)
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
+    implementation(libs.androidx.compose.animation.core)
     ksp(libs.androidx.room.compiler)
 
     // DataStore for lightweight user progress/preferences

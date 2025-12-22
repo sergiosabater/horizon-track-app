@@ -61,6 +61,7 @@ dependencies {
     implementation(libs.androidx.room.ktx)
     implementation(libs.androidx.compose.animation.core)
     implementation(libs.androidx.compose.foundation.layout)
+    implementation(libs.androidx.material3)
     ksp(libs.androidx.room.compiler)
 
     // DataStore for lightweight user progress/preferences

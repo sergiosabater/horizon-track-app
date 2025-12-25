@@ -50,3 +50,32 @@ ui
 
 ---
 
+## 🛠️ Tech Stack
+
+### Core
+- **Kotlin**
+- **Jetpack Compose**
+- **Android SDK (API 26+)**
+
+### Architecture & State
+- ViewModel
+- Kotlin Coroutines
+- StateFlow & Flow
+
+### Dependency Injection
+- **Hilt (Dagger)**
+
+### Persistence
+- **Room** (local database)
+- **DataStore** (preferences)
+
+### Navigation
+- **Jetpack Navigation Compose**
+
+### UI
+- Material 3
+- Compose Animations
+- Adaptive layouts
+
+---
+

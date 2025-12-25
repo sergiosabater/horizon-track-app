@@ -41,3 +41,12 @@ ui
 ├── components
 ├── viewmodel
 
+---
+
+### Architectural Pattern
+- **MVVM (Model–View–ViewModel)**
+- **Unidirectional Data Flow (UDF)**
+- **Single Source of Truth**
+
+---
+

@@ -79,3 +79,31 @@ ui
 
 ---
 
+## 🧪 Testing
+
+HorizonTrack is designed with testability in mind.
+
+### Unit Tests
+- JUnit
+- MockK
+- Coroutine Test
+
+### UI Tests
+- Compose UI Testing
+- Espresso (interop)
+
+### Coverage
+- Domain layer fully unit-tested
+- ViewModels tested with fake repositories
+
+---
+
+## 📦 Modules
+
+- `core`: shared utilities and base classes  
+- `data`: repositories, data sources, mappers  
+- `domain`: business logic and use cases  
+- `ui`: screens, composables, view models  
+
+---
+

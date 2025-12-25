@@ -28,3 +28,16 @@ Define your goals, break them down into milestones, and track your daily progres
 
 HorizonTrack is built following **Clean Architecture principles**, ensuring scalability, testability, and long-term maintainability.
 
+data
+├── local
+├── remote
+├── repository
+domain
+├── model
+├── repository
+├── usecase
+ui
+├── screens
+├── components
+├── viewmodel
+
